@@ -4,6 +4,8 @@ function! s:confirm(msg)
     return input(a:msg) =~? '^y\%[es]$'
 endfunction
 
+let s:a_day = 24 * 60 * 60
+
 function! s:open_task_sched_achv_windows(time, force)
     let year  = strftime("%Y", a:time)
     let month = strftime("%m", a:time)
@@ -20,3 +22,5 @@ function! s:open_task_sched_achv_windows(time, force)
 endfunction
 
 command! -nargs=0 Today call s:open_task_sched_achv_windows(localtime(), 0)
+command! -nargs=0 Yesterday call s:open_task_sched_achv_windows(localtime() - s:a_day, 0)
+command! -nargs=0 Tomorrow call s:open_task_sched_achv_windows(localtime() + s:a_day, 0)
